@@ -7,18 +7,16 @@ let withdrawal = $("withdrawal")
 let customerName = $("customerName")
 let customerBalance = $("customerBalance")
 
-let bankAccount = function (owner) {
+function bankAccount(owner) {
     let balance = 0
     let ownerName = owner
     return {
         getOwnerName: function () {
             customerName.innerHTML = ownerName
-            return this
         },
         getBalance: function (amt) {
             bankAccount.getOwnerName()
             customerBalance.innerHTML = `$${amt.toFixed(2)}`
-            return this
         },
         makeWithdrawal: function () {
             let withdrawalAmt = parseFloat(prompt("How much are you withdrawing?"))
@@ -28,7 +26,6 @@ let bankAccount = function (owner) {
             } else {
                 alert("That is not an valid withdrawal amount")
             }
-            return this
         },
         makeDeposit: function () {
             let depositAmt = parseFloat(prompt("How much are you depositing?"))
@@ -38,19 +35,21 @@ let bankAccount = function (owner) {
             }  else {
                 alert("That is not an valid deposit amount")
             }
-            return this
         }
     }  
 }
 
 function getName() {
     let owner = prompt("What is your full name?")
-    if (owner != '') {
-        bankAccount = bankAccount(owner)
-        bankAccount.getOwnerName()
-        // fullName.disabled = true
-        deposit.addEventListener("click", bankAccount.makeDeposit)
-        withdrawal.addEventListener("click", bankAccount.makeWithdrawal)
+    try {
+        if (owner != '') {
+            bankAccount = bankAccount(owner)
+            bankAccount.getOwnerName()
+            deposit.addEventListener("click", bankAccount.makeDeposit)
+            withdrawal.addEventListener("click", bankAccount.makeWithdrawal)
+        }
+    } catch(err) {
+        alert("If you are not the owner of the current account, please log out and then log in")
     }
 }
 

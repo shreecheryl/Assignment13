@@ -6,11 +6,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <script src="js/bank-account.js" defer></script>
+    <style>
+        body {
+            margin: 20px;
+            font-family: "helvetica neue", helvetica, arial,  sans-serif;
+        }
+        button {
+            margin-bottom: 9px;
+        }
+    </style>
 </head>
 
 <body>
+    <h2>Bank Account</h2>
     <div>
-        <button type="button" id="name">Name</button><br>
+        <button type="button" id="name">Login</button><br>
         <button type="button" id="deposit">Deposit</button><br>
         <button type="button" id="withdrawal">Withdrawal</button><br>
         <button type="button" onClick="window.location.reload()">Logout</button>
