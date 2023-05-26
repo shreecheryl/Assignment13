@@ -1,4 +1,3 @@
-
 const $ = (id) => document.getElementById(id)
 
 let fullName = $("name")
