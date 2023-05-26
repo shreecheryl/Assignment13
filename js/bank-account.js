@@ -39,7 +39,7 @@ const bankAccount = function (owner) {
             }
             return this
         }
-    }  
+    }
 }
 
 function getName() {
