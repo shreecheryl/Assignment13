@@ -7,7 +7,6 @@ let customerInfo = $("withdrawal")
 let customerName = $("customerName")
 let customerBalance = $("customerBalance")
 
-
 const bankAccount = function (owner) {
     let balance = 0
     let ownerName = owner
