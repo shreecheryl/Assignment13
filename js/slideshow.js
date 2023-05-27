@@ -50,10 +50,12 @@ const slideshow = function () {
             return currentSpeed
         },
         setSpeed: function () {
-            stopSlideShow()
-            speed = prompt(`The current speed is ${newSlideShow.getSpeed()}. What speed would you like to set it to?`)
-            newSlideShow.startSlideShow()
-            return this
+            let zak = this
+            return function () {
+                stopSlideShow()
+                speed = prompt(`The current speed is ${zak.getSpeed()}. What speed would you like to set it to?`)
+                zak.startSlideShow()
+            }
         },
         startSlideShow: function () {
             if (arguments.length === 2) {
@@ -102,4 +104,4 @@ newSlideShow.loadImages(slides).startSlideShow($('image'), $('caption'))
 // ATTACH EVENT HANDLER TO PLAY/PAUSE BUTTON
 $('play_pause').onclick = newSlideShow.createToggleHandler()
 
-$('set_speed').addEventListener("click", newSlideShow.setSpeed)
+$('set_speed').onclick = newSlideShow.setSpeed()
