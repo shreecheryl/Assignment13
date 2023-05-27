@@ -52,6 +52,11 @@ const slideshow = function () {
         setSpeed: function () {
             let zak = this
             return function () {
+                if (play === false) {
+                    zak.startSlideShow
+                    $('play_pause').value = 'Pause'
+                    play = true
+                }
                 stopSlideShow()
                 speed = prompt(`The current speed is ${zak.getSpeed()}. What speed would you like to set it to?`)
                 zak.startSlideShow()
