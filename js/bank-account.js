@@ -20,22 +20,28 @@ const bankAccount = function (owner) {
             return this
         },
         makeWithdrawal: function () {
-            let withdrawalAmt = parseFloat(prompt("How much are you withdrawing?"))
-            if (withdrawalAmt != NaN && withdrawalAmt <= balance ) {
-                balance -= withdrawalAmt
-            } else {
-                alert("That is not an valid withdrawal amount")
-            }
-            return this
+            let acct = this
+            return function () {
+                let withdrawalAmt = parseFloat(prompt("How much are you withdrawing?"))
+                if (withdrawalAmt != NaN && withdrawalAmt <= balance ) {
+                    balance -= withdrawalAmt
+                    acct.getBalance()
+                } else {
+                    alert("That is not an valid withdrawal amount")
+                }
+            }   
         },
         makeDeposit: function () {
-            let depositAmt = parseFloat(prompt("How much are you depositing?"))
-            if (depositAmt != NaN && depositAmt > 0 ) {
-                balance += depositAmt
-            }  else {
-                alert("That is not an valid deposit amount")
+            let acct = this
+            return function () {
+                let depositAmt = parseFloat(prompt("How much are you depositing?"))
+                if (depositAmt != NaN && depositAmt > 0 ) {
+                    balance += depositAmt
+                    acct.getBalance()
+                }  else {
+                    alert("That is not an valid deposit amount")
+                }
             }
-            return this
         }
     }
 }
@@ -46,10 +52,8 @@ function getName() {
         let newBankAccount = bankAccount(owner)
         newBankAccount.getOwnerName()
         newBankAccount.getBalance()
-        deposit.addEventListener("click", newBankAccount.makeDeposit)
-        deposit.addEventListener("click", newBankAccount.getBalance)
-        withdrawal.addEventListener("click", newBankAccount.makeWithdrawal)
-        withdrawal.addEventListener("click", newBankAccount.getBalance)
+        deposit.addEventListener("click", newBankAccount.makeDeposit())
+        withdrawal.addEventListener("click", newBankAccount.makeWithdrawal())
     }
 }
 
