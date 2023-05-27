@@ -6,6 +6,7 @@ const slideshow = function () {
     // PRIVATE MEMBERS
     let timer
     let play = true
+    let speed = 2000
     let nodes = {image: null, caption: null}
     let img = {cache: [], counter: 0}
     // PRIVATE: STOPS SLIDESHOW
@@ -44,12 +45,22 @@ const slideshow = function () {
             }
             return this
         },
+        getSpeed: function () {
+            let currentSpeed = speed
+            return currentSpeed
+        },
+        setSpeed: function () {
+            stopSlideShow()
+            speed = prompt(`The current speed is ${newSlideShow.getSpeed()}. What speed would you like to set it to?`)
+            newSlideShow.startSlideShow()
+            return this
+        },
         startSlideShow: function () {
             if (arguments.length === 2) {
                 nodes.image = arguments[0]
                 nodes.caption = arguments[1]
             }
-            timer = setInterval(displayNextImage, 2000)
+            timer = setInterval(displayNextImage, speed)
             return this
         },
         createToggleHandler: function () {
@@ -90,3 +101,5 @@ newSlideShow.loadImages(slides).startSlideShow($('image'), $('caption'))
 
 // ATTACH EVENT HANDLER TO PLAY/PAUSE BUTTON
 $('play_pause').onclick = newSlideShow.createToggleHandler()
+
+$('set_speed').addEventListener("click", newSlideShow.setSpeed)
